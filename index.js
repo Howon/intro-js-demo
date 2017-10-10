@@ -1,39 +1,51 @@
-$(document).ready(function() {
-	$.ajax({
-		url : 'https://www.reddit.com/r/showerthoughts.json',
-		type : 'GET',
-		success : function(res) {		
-			  	var titles = res.data.children.map(element => {
-					
-					if (element.data.over_18 == false){
-						var textNode = document.createTextNode(element.data.title);
+const httpReq = (mode, path, success, fail) => {
+  const xmlhttp = new XMLHttpRequest();
 
-					}
+  xmlhttp.onreadystatechange = () => {
+    if (xmlhttp.readyState === XMLHttpRequest.DONE) {
+      if (xmlhttp.status === 200) {
+        success(JSON.parse(xmlhttp.responseText));
+      } else {
+        fail();
+      }
+    }
+  };
 
-			  		return textNode
-			  	});
+  xmlhttp.open(mode, path, true);
+  xmlhttp.send();
+};
 
-			  	var authors = res.data.children.map(element => {
-					
-					if (element.data.over_18 == false){
-						var textNode = document.createTextNode("—" + element.data.author);
+(() => {
+  httpReq("GET", "https://www.reddit.com/r/showerthoughts.json", res => {
+    const children = res.data.children;
 
-					}
+    const titles = children.map(x => x.data).filter(data => {
+      return data.over_18 == false
+    }).map(data => {
+      return document.createTextNode(data.title);
+    });
 
-			  		return textNode
-			  	});
+    const authors = children.map(x => x.data).filter(data => {
+      return data.over_18 == false
+    }).map(data => {
+      return document.createTextNode("—" + data.author);
+    });
 
-  				var number = Math.floor((Math.random() * 24) + 1);
-  				if (titles[number].length > 120){
-  					var l = document.getElementsByClassName("long_quote")[0].appendChild(titles[number]);
-  				}
+    const number = Math.floor((Math.random() * 24) + 1);
 
-  				else {
-  					var g = document.getElementsByClassName("quote")[0].appendChild(titles[number]);
+    if (titles[number].length > 120){
+      const l = document.getElementsByClassName("long_quote")[0].appendChild(titles[number]);
+    }
 
-  				}
+    else {
+      const g = document.getElementsByClassName("quote")[0].appendChild(titles[number]);
 
-  				var a = document.getElementsByClassName("author")[0].appendChild(authors[number]);
-		}
-	});
-});
+    }
+
+    const a = document.getElementsByClassName("author")[0].appendChild(authors[number]);
+  });
+})();
+
+const x = y => {y + 5;}
+
+x(f, s)
