@@ -19,33 +19,20 @@ const httpReq = (mode, path, success, fail) => {
   httpReq("GET", "https://www.reddit.com/r/showerthoughts.json", res => {
     const children = res.data.children;
 
-    const titles = children.map(x => x.data).filter(data => {
+    const filteredChildren = children.map(x => x.data).filter(data => {
       return data.over_18 == false
-    }).map(data => {
-      return document.createTextNode(data.title);
     });
 
-    const authors = children.map(x => x.data).filter(data => {
-      return data.over_18 == false
-    }).map(data => {
-      return document.createTextNode("—" + data.author);
-    });
+    const number = Math.floor((Math.random() * filteredChildren.length));
 
-    const number = Math.floor((Math.random() * 24) + 1);
+    const post = filteredChildren[number];
 
-    if (titles[number].length > 120){
-      const l = document.getElementsByClassName("long_quote")[0].appendChild(titles[number]);
-    }
+    const quote = document.createTextNode(post.title);
+    const author = document.createTextNode("- " + post.author);
 
-    else {
-      const g = document.getElementsByClassName("quote")[0].appendChild(titles[number]);
-
-    }
-
-    const a = document.getElementsByClassName("author")[0].appendChild(authors[number]);
+    const textNode = document.getElementById("quote");
+    const authorNode = document.getElementById("author");
+    textNode.appendChild(quote);
+    authorNode.appendChild(author);
   });
 })();
-
-const x = y => {y + 5;}
-
-x(f, s)

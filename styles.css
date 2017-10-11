@@ -1,11 +1,3 @@
-html {
-    background: linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), url(wow3.jpg) no-repeat center center fixed;
-    -webkit-background-size: cover;
-       -moz-background-size: cover;
-         -o-background-size: cover;
-            background-size: cover;
-}
-
 .container {
     font-family: 'Julius Sans One', cursive;
     line-height: 400%;
@@ -18,19 +10,26 @@ html {
     text-align: left;
     color: white;
     border-left: .4vh solid white;
+    text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
 }
 
-.quote {
-    font-size: 7vh;
+body {
+    margin: 0;
 }
 
-.long_quote {
-    font-size: 5vh;
+img {
+    position:fixed;
+    width: 100%;
+    height: 100%;
 }
 
-.author {
+#quote {
+    font-size: 30px;
+}
+
+#author {
     font-family: 'Open Sans', sans-serif;
-    font-size: 3vh;
+    font-size: 25px;
     font-variant: small-caps;
 
     text-align: right;

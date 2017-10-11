@@ -4,12 +4,11 @@
 	"version": "1.0.0",
 
 	"manifest_version": 2,
-	"icons": { 
+	"icons": {
 		"16": "shower_thoughts.png"
 	},
 
-
-	"chrome_url_overrides" : { 
+	"chrome_url_overrides" : {
 		"newtab": "index.html"
 	}
 }
